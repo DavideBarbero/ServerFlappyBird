@@ -1,11 +1,10 @@
 "use strict";
 const mongoFunctions = require("./mongoFunctions");
 const fs = require("fs");
-const HTTPS = require("https");
 
 const express = require("express");
 const cors = require("cors");
-const app = express();
+//const app = express();
 const bodyParser = require("body-parser");
 
 // Online RSA Key Generator
@@ -16,9 +15,11 @@ const credentials = { key: privateKey, cert: certificate };
 const TIMEOUT = 1000;
 let port = 8888;
 
-var httpsServer = HTTPS.createServer(credentials, app);
-httpsServer.listen(port, "127.0.0.1", function () {
-  console.log("Server running on port %s...", port);
+let app = express();
+
+app.listen(8888, function () {
+  let port = this.address().port;
+  console.log("Server listening on port %s...", port);
 });
 
 // middleware
